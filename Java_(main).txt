@@ -1,0 +1,77 @@
+HeatSensor.java:
+---------------
+import java.util.Scanner;
+
+class HeatSensor 
+{
+    Scanner input = new Scanner(System.in);
+    private int heat;
+    private boolean sendOut;
+    private String robotName;
+    
+    public HeatSensor(String robotName, int Heat)
+    {
+        this.robotName = robotName;
+        this.heat = heat;
+        this.sendOut = heat <= 280;
+    }
+    public int getHeat()
+    {
+        return heat;  
+    }
+    public String getRobotName()
+    {
+        return robotName;
+    }
+    public boolean isSentOut()
+    {
+        return sendOut;
+    }
+    public void setrobotName(String robotName)
+    {
+        this.robotName = robotName;
+    }
+    public void setHeat(int heat)
+    {
+        int sensor = input.nextInt();
+        this.heat = sensor;
+        boolean sendOut = heat <= 300;
+    }
+}
+
+HeatSensorRunner.java:
+---------------------
+import java.util.Scanner;
+
+public class HeatSensorRunner {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(true)
+        {
+        // Ask user for robot name
+            System.out.print("Enter robot name: ");
+            String name = sc.nextLine();
+
+        // Ask user for initial heat
+            System.out.print("Enter initial heat value: ");
+            int heat = sc.nextInt();
+
+        // Create HeatSensor object
+            HeatSensor sensor = new HeatSensor(name, heat);
+
+        // Show initial state
+            System.out.println("Robot: " + sensor.getRobotName());
+            System.out.println("Send out? " + sensor.isSentOut());
+
+        // Update heat using user input
+            System.out.print("Enter new heat value: ");
+            int newHeat = sc.nextInt();
+            sensor.setHeat(newHeat);
+
+        // Show updated state
+            System.out.println("Updated heat: " + sensor.getHeat());
+            System.out.println("Send out? " + sensor.isSentOut());
+        } 
+    }
+}
+
